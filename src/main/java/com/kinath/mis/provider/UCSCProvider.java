@@ -1,4 +1,5 @@
-package com.kinath.mis.provider;/* UCSC Provider
+package com.kinath.mis.provider;
+/* UCSC Provider
  Kasun De Zoysa @ UCSC
 */
 
