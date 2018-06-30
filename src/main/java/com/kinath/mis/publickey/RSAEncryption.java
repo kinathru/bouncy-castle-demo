@@ -17,42 +17,44 @@ import java.util.Formatter;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-public class RSAEncryption {
+public class RSAEncryption
+{
+    public static void main( String[] args ) throws Exception
+    {
+        Security.addProvider( new BouncyCastleProvider() );
 
-  public static void main(String[]    args) throws Exception    {
+        String input = "Hello Kasun ..";
+        Cipher cipher = Cipher.getInstance( "RSA/NONE/PKCS1Padding" );
 
-  Security.addProvider(new BouncyCastleProvider());
+        // create the keys
+        KeyPairGenerator generator = KeyPairGenerator.getInstance( "RSA" );
+        generator.initialize( 1024, new SecureRandom() );
 
-  String        input = "Hello Kasun ..";
-  Cipher cipher = Cipher.getInstance("RSA/NONE/PKCS1Padding");
+        KeyPair pair = generator.generateKeyPair();
+        Key pubKey = pair.getPublic();
+        Key privKey = pair.getPrivate();
 
+        // encryption step
+        cipher.init( Cipher.ENCRYPT_MODE, pubKey );
+        byte[] cipherText = cipher.doFinal( input.getBytes() );
+        System.out.println( "Cipher\t: " + byteArray2Hex( cipherText ) );
 
-  // create the keys
-  KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-  generator.initialize(1024,new SecureRandom());
+        // decryption step
+        cipher.init( Cipher.DECRYPT_MODE, privKey );
+        byte[] plainText = cipher.doFinal( cipherText );
+        System.out.println( "Plain\t: " + new String( plainText ) );
 
+    }
 
-  KeyPair          pair = generator.generateKeyPair();
-  Key              pubKey = pair.getPublic();
-  Key              privKey = pair.getPrivate();
-
-  // encryption step
-  cipher.init(Cipher.ENCRYPT_MODE,pubKey);
-  byte[] cipherText = cipher.doFinal(input.getBytes());
-  System.out.println("Cipher : " +byteArray2Hex(cipherText));
-  
-  // decryption step
-  cipher.init(Cipher.DECRYPT_MODE,privKey);
-  byte[] plainText = cipher.doFinal(cipherText);
-  System.out.println("Plain : " +new String(plainText));
-
- }
-
- private static String byteArray2Hex(byte[] hash) {
-     Formatter formatter = new Formatter();
-     for (byte b : hash) formatter.format("%02x", b);
-     return formatter.toString();
-  }
+    private static String byteArray2Hex( byte[] hash )
+    {
+        Formatter formatter = new Formatter();
+        for( byte b : hash )
+        {
+            formatter.format( "%02x", b );
+        }
+        return formatter.toString();
+    }
 
 }
 
