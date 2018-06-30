@@ -15,9 +15,9 @@ public class UCSCProvider extends Provider
         put( "Signature.SHA-1/UCSC", "UCSCSignature" );
         put( "KeyPairGenerator.XYZ", "UCSCKeyPairGenerator" );
         put( "MessageDigest.XOR", "XORMessageDigest" );
-        put( "MessageDigest.SHA-1", "UCSCMessageDigestSHA" );
-        put( "Alg.Alias.MessageDigest.SHA", "SHA-1" );
-        put( "Alg.Alias.MessageDigest.XYZ", "XOR" );
+        put( "MessageDigest.SHA-1", "SHA-1" );
+//        put( "Alg.Alias.MessageDigest.SHA", "SHA-1" );
+//        put( "Alg.Alias.MessageDigest.XYZ", "XOR" );
     }
 
     public static void main( String args[] )

@@ -25,7 +25,7 @@ public class UCSCHash
             byte dataBytes[] = data.getBytes();
 
             //Digest creation
-            MessageDigest md1 = MessageDigest.getInstance( "SHA" );
+            MessageDigest md1 = MessageDigest.getInstance( "SHA-1" );
             md1.update( dataBytes );
             byte digest1[] = md1.digest();
 
@@ -38,7 +38,7 @@ public class UCSCHash
 
             //Digest verification
             String data2 = "kasun!!";
-            MessageDigest md2 = MessageDigest.getInstance( "SHA" );
+            MessageDigest md2 = MessageDigest.getInstance( "SHA-1" );
             md2.update( data2.getBytes() );
             byte digest2[] = md2.digest();
 
